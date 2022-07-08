@@ -1,0 +1,29 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# links
+# <a target="_blank" href="https://icons8.com/icon/101353/html-5">Html 5</a>
+# <a target="_blank" href="https://icons8.com/icon/102501/css3">CSS3</a>
+# <a target="_blank" href="https://icons8.com/icon/39853/javascript">

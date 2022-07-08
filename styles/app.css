@@ -1,0 +1,55 @@
+#app {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 10px 1fr;
+  grid-template-columns: 1fr 10px 1fr;
+}
+
+.area {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.area__label {
+  display: block;
+  padding: .5rem;
+  color: #fff;
+  font-size: 1.4rem;
+  background-color: var(--dark-1);
+}
+
+.area__editor {
+  height: 100%;
+  resize: none;
+  background-color: #333;
+  border: none;
+}
+
+.area__editor:focus {
+  outline: none;
+  border: 1px solid var(--green);
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border: none;
+}
+
+/* Split js */
+
+.vertical-gutter {
+  grid-area: 1 / 2 / 4 / 2;
+  background: var(--dark);
+  cursor: col-resize;
+}
+
+.horizontal-gutter {
+  grid-area: 2 / 1 / 3 / 4;
+  cursor: row-resize;
+  background: var(--dark);
+}
