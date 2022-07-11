@@ -23,6 +23,7 @@ const initCode = () => {
   let pathname = window.location.pathname;
   const [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C');
 
+
   let innerCode = {
     html : decode(rawHtml),
     css : decode(rawCss),
@@ -32,7 +33,7 @@ const initCode = () => {
   $html.value = innerCode.html;
   $css.value = innerCode.css;
   $js.value = innerCode.js;
-
+  
   const code = createHtml(innerCode);
   $iframe.setAttribute('srcdoc', code);
 }
