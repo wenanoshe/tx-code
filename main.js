@@ -21,20 +21,23 @@ const $js = document.getElementById('js');
 
 const initCode = () => {
   let pathname = window.location.pathname;
-  const [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C');
+  let [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C');
 
+  rawCss === undefined ? rawCss = '' : rawCss
+  rawJs === undefined ? rawJs = '' : rawJs
 
-  let innerCode = {
-    html : decode(rawHtml),
+  const decodedCode = {
+    html: decode(rawHtml),
     css : decode(rawCss),
-    js : decode(rawJs)
+    js : decode(rawJs),
   }
 
-  $html.value = innerCode.html;
-  $css.value = innerCode.css;
-  $js.value = innerCode.js;
+  $html.value = decodedCode.html;
+  $css.value = decodedCode.css;
+  $js.value = decodedCode.js;
   
-  const code = createHtml(innerCode);
+  console.log(decodedCode);
+  const code = createHtml(decodedCode);
   $iframe.setAttribute('srcdoc', code);
 }
 
