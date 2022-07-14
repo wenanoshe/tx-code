@@ -1,9 +1,14 @@
 'use strict';
 
+import './style.css';
+
 import Split from 'split-grid';
 import { encode, decode } from 'js-base64';
 
-import './style.css';
+import * as Monaco from 'monaco-editor';
+import HtmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
+import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
+import JsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 
 /*
   ====== VARIABLES =====
@@ -14,38 +19,14 @@ const $html = document.getElementById('html');
 const $css = document.getElementById('css');
 const $js = document.getElementById('js');
 
-
 /*
   ====== FUNCTIONS =====
 */
 
-const initCode = () => {
-  let pathname = window.location.pathname;
-  let [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C');
-
-  rawCss === undefined ? rawCss = '' : rawCss
-  rawJs === undefined ? rawJs = '' : rawJs
-
-  const decodedCode = {
-    html: decode(rawHtml),
-    css : decode(rawCss),
-    js : decode(rawJs),
-  }
-
-  $html.value = decodedCode.html;
-  $css.value = decodedCode.css;
-  $js.value = decodedCode.js;
-  
-  console.log(decodedCode);
-  const code = createHtml(decodedCode);
-  $iframe.setAttribute('srcdoc', code);
-}
-
-
 const update = () => {
-  const html = $html.value;
-  const css = $css.value;
-  const js = $js.value;
+  const html = htmlEditor.getValue();
+  const css = cssEditor.getValue();
+  const js = jsEditor.getValue();
 
   // encoding the code pased to the textareas
   const rawCode = `${encode(html)}|${encode(css)}|${encode(js)}`;
@@ -53,8 +34,8 @@ const update = () => {
   // passing baseCode to the url
   history.replaceState(null, null, rawCode);
 
-  const code = createHtml({html, css, js});
-  $iframe.setAttribute('srcdoc', code);
+  const htmlForPreview = createHtml({html, css, js});
+  $iframe.setAttribute('srcdoc', htmlForPreview);
 }
 
 const createHtml = ({html, css, js}) => {
@@ -84,11 +65,70 @@ const createHtml = ({html, css, js}) => {
   ====== CODE EXECUTION =====
 */
 
-initCode();
+let pathname = window.location.pathname;
+let [rawHtml, rawCss, rawJs] = pathname.slice(1).split('%7C');
 
-$html.addEventListener('input', (e) => update());
-$css.addEventListener('input', (e) => update());
-$js.addEventListener('input', (e) => update());
+rawCss === undefined ? rawCss = '' : rawCss
+rawJs === undefined ? rawJs = '' : rawJs
+
+const decodedCode = {
+ html: decode(rawHtml),
+ css : decode(rawCss),
+ js : decode(rawJs),
+}
+
+const code = createHtml(decodedCode);
+
+window.MonacoEnvironment = {
+   getWorker: (_, label) => {
+      switch (label) {
+         case 'html':
+            return new HtmlWorker()
+         break;
+
+         case 'css':
+            return new CssWorker()
+         break;
+
+         case 'javascript':
+            return new JsWorker()
+         break;
+
+      }
+   }
+}
+
+
+const COMMON_EDITOR_OPTIONS = {
+   automaticLayout: true,
+   fontSize: 14,
+   theme: 'vs-dark',
+}
+
+const htmlEditor = Monaco.editor.create($html, {
+   value: decodedCode.html,
+   language: 'html',
+   ...COMMON_EDITOR_OPTIONS,
+});
+
+
+const cssEditor = Monaco.editor.create($css, {
+   value: decodedCode.css,
+   language: 'css',
+   ...COMMON_EDITOR_OPTIONS,
+});
+
+const jsEditor = Monaco.editor.create($js, {
+   value: decodedCode.js,
+   language: 'javascript',
+   ...COMMON_EDITOR_OPTIONS,
+});
+
+htmlEditor.onDidChangeModelContent(update);
+cssEditor.onDidChangeModelContent(update);
+jsEditor.onDidChangeModelContent(update);
+
+update();
 
 /* Split js */
 
