@@ -6,19 +6,51 @@
     <title>Tx Code</title>
   </head>
   <body>
-    <div id="app">
-      <div class='editor' id='html'></div>
 
-      <div class='editor' id='css'></div>
+    <div id="app">
+     <aside class="sidebar">
+
+        <div class="sidebar__top">
+           <a href="" class="sidebar__logo">
+              Logo
+           </a>
+
+            <button type="button" class="sidebar__btn sidebar__download">
+               <img class="sidebar__icon" src="./assets/icons/compress_zip.svg" alt="Download material icon" >
+            </button>
+            
+            <button type="button" class="sidebar__btn sidebar__share">
+               <img class="sidebar__icon" src="./assets/icons/share.svg" alt="Share material icon" >
+            </button>
+        </div>
+
+        <div class="sidebar__bot">
+         <button type="button" class="sidebar__btn sidebar__help">
+            <img class="sidebar__icon" src="./assets/icons/info.svg" alt="Settings material icon" >
+         </button>
+
+         <button type="button" class="sidebar__btn sidebar__settings">
+            <img class="sidebar__icon" src="./assets/icons/icons-settings.svg" alt="Settings material icon" >
+         </button>
+        </div>
+
+
+     </aside>
+
+     <section class="editor">
+      <div class='code' id='html'></div>
+
+      <div class='code' id='css'></div>
       
-      <div class='editor' id="js"></div>
+      <div class='code' id="js"></div>
 
       <iframe id="iframe" class="iframe"></iframe>
 
       <div class="horizontal-gutter"></div>
       <div class="vertical-gutter"></div>
-
+     </section>
     </div>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

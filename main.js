@@ -103,6 +103,13 @@ const COMMON_EDITOR_OPTIONS = {
    automaticLayout: true,
    fontSize: 14,
    theme: 'vs-dark',
+   padding: {
+      top: 14
+   },
+   minimap: {
+      enabled: false
+   },
+
 }
 
 const htmlEditor = Monaco.editor.create($html, {
