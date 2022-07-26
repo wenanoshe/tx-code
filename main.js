@@ -19,6 +19,12 @@ const $html = document.getElementById('html');
 const $css = document.getElementById('css');
 const $js = document.getElementById('js');
 
+// Options
+const $lineNumbers = document.getElementById('lineNumbers'),
+  $fontSize = document.getElementById('fontSize'),
+  $wordWrap = document.getElementById('wordWrap'),
+  $theme = document.getElementById('theme');
+
 /*
   ====== FUNCTIONS =====
 */
@@ -100,9 +106,12 @@ window.MonacoEnvironment = {
 
 
 const COMMON_EDITOR_OPTIONS = {
-   automaticLayout: true,
-   fontSize: 14,
-   theme: 'vs-dark',
+  automaticLayout: true,
+  fontSize: $fontSize.value,
+  theme: $theme.value,
+  wordWrap: $wordWrap.value,
+  lineNumbers: $lineNumbers.value,
+
    padding: {
       top: 14
    },
@@ -112,12 +121,18 @@ const COMMON_EDITOR_OPTIONS = {
 
 }
 
+// $lineNumbers.addEventListener('change', e => {
+//   COMMON_EDITOR_OPTIONS.lineNumbers = $lineNumbers.value;
+//   console.log(COMMON_EDITOR_OPTIONS)
+// })
+
 const htmlEditor = Monaco.editor.create($html, {
    value: decodedCode.html,
    language: 'html',
    ...COMMON_EDITOR_OPTIONS,
 });
 
+console.log(htmlEditor)
 
 const cssEditor = Monaco.editor.create($css, {
    value: decodedCode.css,

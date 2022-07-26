@@ -5,6 +5,10 @@
   --dark-1: #264653;
   --dark-2: #396a7d;
 
+  --gray-80: #d1ecf280;
+  --gray-90: #d1ecf290;
+  --gray: #d1ecf2;
+
   --green: #2a9d8f;
 
   --yellow: #e9c46a;
@@ -12,4 +16,6 @@
   --orange: #f4a261;
 
   --red: #e76f51;
+
+  --rad: 5px;
 }

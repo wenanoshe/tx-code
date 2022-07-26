@@ -8,6 +8,50 @@
   <body>
 
     <div id="app">
+
+      <div class="modal">
+         <button class="modal__closeModal">
+            <img class="modal__closeIcon" src="./assets/icons/closeIcon.svg" alt="Material close arrow">
+         </button>
+
+         <form class="form">
+            <h3 class="form__title">Settings</h3>
+            <div class="form__option">
+                <label for="lineNumbers" class="form__stm">Line numbers</label>
+                <select id="lineNumbers"  class="form__select">
+                  <option selected value="on">On</option>
+                  <option value="off">Off</option>
+                  <option value="relative">Relative</option>
+                  <option value="interval">Interval</option>
+                </select>
+            </div>
+
+            <div class="form__option">
+                <label for="wordWrap" class="form__stm">Word Wrap</label>
+                <select id="wordWrap" class="form__select">
+                  <option selected value="on">On</option>
+                  <option value="off">Off</option>
+                  <option value="wordWrapColumn">Word Wrap Column</option>
+                  <option value="bounded">Bounded</option>
+                </select>
+            </div>
+
+            <div class="form__option">
+                <label for="fontSize" class="form__stm">Font size</label>
+                <input id="fontSize" value="14" class="form__input-fz" type="number" min="8" max="50">
+            </div>
+
+            <div class="form__option">
+                <label for="theme" class="form__stm">Color Theme</label>
+                <select id="theme" class="form__select">
+                  <option value="vs-light">Light</option>
+                  <option selected value="vs-dark">Dark</option>
+                </select>
+            </div>
+
+         </form>
+      </div>
+
      <aside class="sidebar">
 
         <div class="sidebar__top">
@@ -33,7 +77,6 @@
             <img class="sidebar__icon" src="./assets/icons/icons-settings.svg" alt="Settings material icon" >
          </button>
         </div>
-
 
      </aside>
 
